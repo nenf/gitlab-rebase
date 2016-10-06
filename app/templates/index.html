@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+    <form class="ci_form" action="/mr_info" method="POST" >
+        <ul id="ul_main">
+            <li>
+                <img src="/static/images/aktiv.jpg">
+            </li>
+            <li>
+                <p>
+                    <label for="project_name">Select some project:</label>
+                    <select name="project_name">
+                        {% for project in projects_name %}
+                            <option value="{{ project }}">{{ project }}</option>
+                        {% endfor %}
+                    </select>
+                </p>
+                <div style="margin-top: 20px;">
+                    <button class="submit" type="submit">Get MR's</button>
+                </div>
+            </li>
+        </ul>
+    </form>
+{% endblock %}

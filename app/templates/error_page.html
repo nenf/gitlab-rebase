@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+    <form class="ci_form">
+        <ul>
+            <li>
+                <h2>Error message:</h2>
+            </li>
+            <li>
+                {% if error_info is string %}
+                    <p>{{ error_info }}</p>
+                {% else %}
+                    {% for e in error_info %}
+                        <p>{{ e }}</p>
+                    {% endfor %}
+                {% endif %}
+
+            </li>
+        </ul>
+    </form>
+{% endblock %}

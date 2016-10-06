@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+    <form class="ci_form">
+        <ul>
+            <li>
+                <h2>Info message:</h2>
+            </li>
+            <li>
+                {% for m in message_info %}
+                    <p>{{ m }}</p>
+                {% endfor %}
+            </li>
+        </ul>
+    </form>
+{% endblock %}

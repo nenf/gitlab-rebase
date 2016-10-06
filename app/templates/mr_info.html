@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <script src="http://s.codepen.io/assets/libs/modernizr.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='normalize.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='list_style.css') }}">
+    <form action="/merge" method="POST" >
+    <div id="demo">
+    <h1>Merge requests - {{ title }} ({{ mr_data.__len__() }}):</h1>
+        <div class="table-responsive-vertical shadow-z-1">
+            <table id="table" class="table table-hover table-mc-light-blue">
+                <thead>
+                    <tr>
+                        <th>MR id</th>
+                        <th>Source branch</th>
+                        <th>Target branch</th>
+                        <th>Author</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for m in mr_data %}
+
+                        <tr>
+                            <td data-title="ID"><a href='{{ m["web_url"]}}' target='_blank'>{{ m["iid"] }}</a></td>
+                            <td data-title="Source">{{ m["source_branch"] }}</td>
+                            <td data-title="Target">{{ m["target_branch"] }}</td>
+                            <td data-title="Author">{{ m["author"]["name"] }}</td>
+                                {% if m["merge_status"] == "can_be_merged" %}
+                                    {% if not m["work_in_progress"] %}
+                                        <td data-title="Action"><button name='{{ m["project_id"] }}' value='{{ m["id"] }}' class="btn_mr" type="submit">Merge</button></td>
+                                    {% else %}
+                                        <td data-title="Action">WIP</td>
+                                    {% endif %}
+                                {% else %}
+                                    <td data-title="Action">{{ m["merge_status"].replace("_", " ") }}</td>
+                                {% endif %}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    </form>
+{% endblock %}

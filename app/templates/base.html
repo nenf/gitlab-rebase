@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    {% if title %}
+        <title>Merge panel | {{title}}</title>
+    {% else %}
+        <title>Merge panel</title>
+    {% endif %}
+    <link rel="stylesheet" media="screen" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div id="center_div">
+        {% block content %}{% endblock %}
+        <p>
+            <a href="/">Merge panel</a> |
+            <a href="{{ url_for('help') }}">Help page</a>
+        </p>
+    </div>
+</body>
+</html>
